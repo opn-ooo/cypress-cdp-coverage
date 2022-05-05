@@ -21,7 +21,7 @@ async function connectToCDP(port) {
       })
       return
     } catch (error) {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 100))
     }
   }
 }
