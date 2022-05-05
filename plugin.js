@@ -63,7 +63,7 @@ module.exports = /** @type {Cypress.PluginConfig} */ (
         const dir = process.env.CYPRESS_CDP_COVERAGE
         if (dir) {
           fs.mkdirSync(dir, { recursive: true })
-          const file = path.join(dir, `cycov${Date.now()}.json`)
+          const file = path.join(dir, `coverage_${process.pid}_${Date.now()}.json`)
           fs.writeFileSync(file, JSON.stringify(coverage))
         }
         return null
