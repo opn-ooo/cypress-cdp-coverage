@@ -1,0 +1,17 @@
+{
+  "name": "cypress-cdp-coverage",
+  "version": "1.0.0",
+  "description": "Cypress plugin to collect coverage data directly from Google Chrome instance",
+  "scripts": {},
+  "files": [
+    "plugin.js",
+    "support.js"
+  ],
+  "dependencies": {
+    "chrome-remote-interface": "^0.31.2"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "cypress": "~9.5.1"
+  }
+}
