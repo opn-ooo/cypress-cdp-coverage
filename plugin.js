@@ -59,7 +59,7 @@ module.exports = /** @type {Cypress.PluginConfig} */ (
       'cycov:afterEach': async () => {
         if (!cdp) return null
         const coverage = await cdp.Profiler.takePreciseCoverage()
-        const dir = process.env.CYCOV_COVERAGE
+        const dir = process.env.CYPRESS_CDP_COVERAGE
         if (dir) {
           fs.mkdirSync(dir, { recursive: true })
           const file = path.join(dir, `cycov${Date.now()}.json`)

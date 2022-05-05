@@ -21,7 +21,7 @@ In your Cypress `support/index.js` file:
 import 'cypress-cdp-coverage/support'
 ```
 
-When running Cypress, set the environment variable `CYCOV_COVERAGE` to a directory. When tests are run, the coverage data will be written to that directory.
+When running Cypress, set the environment variable `CYPRESS_CDP_COVERAGE` to a directory. When tests are run, the coverage data will be written to that directory.
 
 ## Prior art
 
