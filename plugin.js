@@ -6,6 +6,7 @@ const path = require('path')
 
 /** @type {CDP.Client | undefined} */
 let cdp
+let started = false
 
 /**
  * @param {number} port
@@ -45,18 +46,18 @@ module.exports = /** @type {Cypress.PluginConfig} */ (
       connectToCDP(port)
     })
     on('task', {
-      'cycov:before': async () => {
+      'cypress-cdp-coverage:before': async () => {
+        await start()
         return null
       },
-      'cycov:beforeEach': async () => {
-        if (!cdp) return null
-        await cdp.Profiler.enable()
-        const callCount = true
-        const detailed = true
-        await cdp.Profiler.startPreciseCoverage(callCount, detailed)
+      'cypress-cdp-coverage:beforeEach': async () => {
+        await start()
         return null
       },
-      'cycov:afterEach': async () => {
+      'cypress-cdp-coverage:afterEach': async () => {
+        return null
+      },
+      'cypress-cdp-coverage:after': async () => {
         if (!cdp) return null
         const coverage = await cdp.Profiler.takePreciseCoverage()
         const dir = process.env.CYPRESS_CDP_COVERAGE
@@ -66,10 +67,18 @@ module.exports = /** @type {Cypress.PluginConfig} */ (
           fs.writeFileSync(file, JSON.stringify(coverage))
         }
         return null
-      },
-      'cycov:after': async () => {
-        return null
       }
     })
   }
 )
+
+async function start() {
+  if (!cdp) return
+  if (started) return
+  await cdp.Profiler.enable()
+  await cdp.Profiler.startPreciseCoverage({
+    callCount: true,
+    detailed: true
+  })
+  started = true
+}

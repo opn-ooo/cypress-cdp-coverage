@@ -1,15 +1,15 @@
 before(() => {
-  cy.task('cycov:before')
+  cy.task('cypress-cdp-coverage:before')
 })
 
 beforeEach(() => {
-  cy.task('cycov:beforeEach')
+  cy.task('cypress-cdp-coverage:beforeEach')
 })
 
 afterEach(() => {
-  cy.task('cycov:afterEach')
+  cy.task('cypress-cdp-coverage:afterEach')
 })
 
 after(() => {
-  cy.task('cycov:after')
+  cy.task('cypress-cdp-coverage:after')
 })
